@@ -1,0 +1,37 @@
+graph LR
+  linkStyle default fill:#ffffff
+
+  subgraph diagram ["Nível 2B - Detalhe do Navegador (React e TypeScript)"]
+    style diagram fill:#ffffff,stroke:#ffffff
+
+    1["<div style='font-weight: bold'>Participante (Editor ou Leitor)</div><div style='font-size: 70%; margin-top: 0px'>[Person]</div><div style='font-size: 80%; margin-top:10px'>Acessa a sessão por link<br />(edição ou leitura), sem<br />conta de usuário (até 5<br />simultâneos por sessão).</div>"]
+    style 1 fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A
+
+    subgraph 2 ["DT-Blocks 2.0"]
+      style 2 fill:#ffffff,stroke:#64748B,color:#1E293B,stroke-dasharray: 5 5
+
+      subgraph 3 ["Navegador"]
+        style 3 fill:#EFF6FF,stroke:#2563EB,color:#1E3A8A
+
+        4["<div style='font-weight: bold'>Modelo e layout</div><div style='font-size: 70%; margin-top: 0px'>[Component: TypeScript]</div><div style='font-size: 80%; margin-top:10px'>Árvore tipada do diagrama<br />(série, paralelo, k-de-n) e<br />posicionamento automático por<br />layout recursivo.</div>"]
+        style 4 fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A
+        5["<div style='font-weight: bold'>Desenho em SVG</div><div style='font-size: 70%; margin-top: 0px'>[Component: React / SVG]</div><div style='font-size: 80%; margin-top:10px'>Desenho vetorial próprio do<br />diagrama RBD na tela.</div>"]
+        style 5 fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A
+        6["<div style='font-weight: bold'>Interação</div><div style='font-size: 70%; margin-top: 0px'>[Component: TypeScript / WebSocket]</div><div style='font-size: 80%; margin-top:10px'>Edição de blocos, travas de<br />campo, desfazer individual<br />(até 100 ações) e mensagens<br />WebSocket.</div>"]
+        style 6 fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A
+        7["<div style='font-weight: bold'>Exportação em SVG e PNG</div><div style='font-size: 70%; margin-top: 0px'>[Component: TypeScript]</div><div style='font-size: 80%; margin-top:10px'>Exportação em SVG e PNG feita<br />no navegador (além de JSON e<br />função estrutural).</div>"]
+        style 7 fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A
+      end
+
+      8["<div style='font-weight: bold'>Nginx</div><div style='font-size: 70%; margin-top: 0px'>[Container: Nginx]</div><div style='font-size: 80%; margin-top:10px'>HTTPS e proxy de WebSocket.</div>"]
+      style 8 fill:#E0E7FF,stroke:#4F46E5,color:#312E81
+    end
+
+    1-->|"<div>Manipula blocos, parâmetros,<br />cálculo e desfazer</div><div style='font-size: 70%'>[Interface Web]</div>"|6
+    1-->|"<div>Exporta diagrama (SVG, PNG,<br />JSON, função estrutural)</div><div style='font-size: 70%'>[Interface Web]</div>"|7
+    6-->|"<div>HTTPS e WebSocket (comandos,<br />travas, cálculo, snapshots e<br />difusões)</div><div style='font-size: 70%'>[HTTPS / WebSocket]</div>"|8
+    6-->|"<div>Atualiza o modelo após<br />confirmação ('aplicado') do<br />servidor</div><div style='font-size: 70%'>[TypeScript]</div>"|4
+    4-->|"<div>Árvore do RBD e coordenadas<br />do layout recursivo</div><div style='font-size: 70%'>[TypeScript]</div>"|5
+    5-->|"<div>SVG da tela para exportação<br />em SVG e PNG</div><div style='font-size: 70%'>[DOM / SVG]</div>"|7
+
+  end

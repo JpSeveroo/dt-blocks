@@ -1,0 +1,41 @@
+@startuml
+title <size:24>Nível 3 - Fluxo de uma Edição (DT-Blocks 2.0)</size>\n<size:18>Fluxo de uma edição em tempo real (meta de 500 ms ida e volta)</size>
+
+set separator none
+left to right direction
+
+<style>
+  root {
+    BackgroundColor: #ffffff
+    FontColor: #444444
+  }
+</style>
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+!include <C4/C4_Component>
+
+System_Boundary("DTBlocks20_boundary", "DT-Blocks 2.0", $tags="") {
+  Container_Boundary("DTBlocks20.ProcessoFastAPIumworker_boundary", "Processo FastAPI (um worker)", $tags="") {
+    Component(DTBlocks20.ProcessoFastAPIumworker.Limitesdeuso, "Limites de uso", $techn="Python", $descr="Limites por IP e por sessão.", $tags="", $link="")
+    Component(DTBlocks20.ProcessoFastAPIumworker.Sessõesemmemória, "Sessões em memória", $techn="Python (Memória)", $descr="Estado das sessões em memória (diagrama versionado e participantes).", $tags="", $link="")
+    Component(DTBlocks20.ProcessoFastAPIumworker.Travasdecampo, "Travas de campo", $techn="Python", $descr="Bloqueio por campo com batimento e arrendamento.", $tags="", $link="")
+    Component(DTBlocks20.ProcessoFastAPIumworker.Repositóriodesessões, "Repositório de sessões", $techn="Python / SQLAlchemy", $descr="Interface de repositório com gravação em lote (1 a 2 s).", $tags="", $link="")
+  }
+
+  ContainerDb(DTBlocks20.SQLitemodoWAL, "SQLite (modo WAL)", $techn="SQLite (modo WAL)", $descr="Sessões e métricas por hora.", $tags="", $link="")
+  Container(DTBlocks20.Navegador, "Navegador", $techn="React e TypeScript", $descr="Modelo e layout, desenho em SVG, interação e exportação em SVG e PNG.", $tags="", $link="")
+  Container(DTBlocks20.Nginx, "Nginx", $techn="Nginx", $descr="HTTPS e proxy de WebSocket.", $tags="", $link="")
+}
+
+Rel(DTBlocks20.Navegador, DTBlocks20.Nginx, "1: Editor A pede trava de campo e envia comando de alteração com a versão base", $techn="HTTPS / WebSocket", $tags="", $link="")
+Rel(DTBlocks20.Nginx, DTBlocks20.ProcessoFastAPIumworker.Limitesdeuso, "2: Repassa comando pelo WebSocket ao processo único", $techn="HTTP / WebSocket", $tags="", $link="")
+Rel(DTBlocks20.ProcessoFastAPIumworker.Limitesdeuso, DTBlocks20.ProcessoFastAPIumworker.Sessõesemmemória, "3: Valida limites, permissão, trava, esquema e versão base", $techn="Memória (Python)", $tags="", $link="")
+Rel(DTBlocks20.ProcessoFastAPIumworker.Sessõesemmemória, DTBlocks20.ProcessoFastAPIumworker.Travasdecampo, "4: Confere trava de A, aplica alteração em memória e incrementa a versão", $techn="Memória (Python)", $tags="", $link="")
+Rel(DTBlocks20.ProcessoFastAPIumworker.Sessõesemmemória, DTBlocks20.ProcessoFastAPIumworker.Repositóriodesessões, "5: Difunde 'aplicado, nova versão' aos Editores A e B e agenda gravação", $techn="Interface de repositório", $tags="", $link="")
+Rel(DTBlocks20.ProcessoFastAPIumworker.Repositóriodesessões, DTBlocks20.SQLitemodoWAL, "6: Grava o diagrama no SQLite em lote (1 a 2 s após a última alteração)", $techn="SQLite (WAL)", $tags="", $link="")
+
+SHOW_LEGEND(true)
+hide stereotypes
+@enduml

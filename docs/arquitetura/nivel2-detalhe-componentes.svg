@@ -1,0 +1,311 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1640 1050" width="1640" height="1050" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow-solid" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#1E293B"/>
+    </marker>
+    <marker id="arrow-solid-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 10 1.5 L 1 5 L 10 8.5 z" fill="#1E293B"/>
+    </marker>
+    <marker id="arrow-dashed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#15803D"/>
+    </marker>
+    <marker id="arrow-green-start" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 10 1.5 L 1 5 L 10 8.5 z" fill="#15803D"/>
+    </marker>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+    <filter id="shadow-central" x="-6%" y="-6%" width="112%" height="114%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#16A34A" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <!-- Fundo Geral -->
+  <rect x="0" y="0" width="1640" height="1050" fill="#FFFFFF"/>
+  <rect x="12" y="12" width="1616" height="1026" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+
+  <!-- Cabeçalho -->
+  <text x="820" y="48" text-anchor="middle" font-size="24" font-weight="700" fill="#0F172A">DT-Blocks 2.0 — Nível 2: Detalhe Interno do Navegador e do Processo FastAPI</text>
+  <text x="820" y="74" text-anchor="middle" font-size="14" fill="#475569">Divisão modular do frontend (React e TypeScript) e do processo único do backend (FastAPI / 1 worker uvicorn)</text>
+
+  <!-- ======================================================================= -->
+  <!-- CONTÊINER ESQUERDO: NAVEGADOR (REACT E TYPESCRIPT) -->
+  <!-- ======================================================================= -->
+  <rect x="35" y="100" width="445" height="685" rx="14" fill="#F8FAFC" stroke="#2563EB" stroke-width="2.5" stroke-dasharray="8 5"/>
+  <rect x="55" y="88" width="290" height="26" rx="6" fill="#2563EB"/>
+  <text x="200" y="106" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="0.6">NAVEGADOR (REACT E TYPESCRIPT)</text>
+  <text x="257" y="132" text-anchor="middle" font-size="12" fill="#1E3A8A">[Contêiner Cliente · Máquina de cada pessoa]</text>
+
+  <!-- Componente 1: Interação -->
+  <g filter="url(#shadow)">
+    <rect x="65" y="152" width="385" height="118" rx="10" fill="#DBEAFE" stroke="#2563EB" stroke-width="2"/>
+    <text x="257" y="178" text-anchor="middle" font-size="16" font-weight="700" fill="#1E3A8A">Interação</text>
+    <text x="257" y="196" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1D4ED8">[Componente: TypeScript / WebSocket]</text>
+    <line x1="82" y1="206" x2="432" y2="206" stroke="#93C5FD" stroke-width="1"/>
+    <text x="82" y="225" font-size="11.5" fill="#1E3A8A">• Manipulação de blocos, parâmetros e travas de campo</text>
+    <text x="82" y="243" font-size="11.5" fill="#1E3A8A">• Histórico de desfazer individual na aba (até 100 ações)</text>
+    <text x="82" y="261" font-size="11.5" fill="#1E3A8A">• Identidade no sessionStorage (tolerância de 30 s)</text>
+  </g>
+
+  <!-- Seta Interação -> Modelo e layout -->
+  <line x1="257" y1="270" x2="257" y2="318" stroke="#1E293B" stroke-width="2" marker-end="url(#arrow-solid)"/>
+  <polygon points="257,324 251,312 263,312" fill="#1E293B"/>
+  <rect x="97" y="281" width="320" height="24" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="257" y="297" text-anchor="middle" font-size="11" font-weight="600" fill="#0F172A">Atualiza modelo após confirmação ('aplicado')</text>
+
+  <!-- Componente 2: Modelo e layout -->
+  <g filter="url(#shadow)">
+    <rect x="65" y="324" width="385" height="118" rx="10" fill="#DBEAFE" stroke="#2563EB" stroke-width="2"/>
+    <text x="257" y="350" text-anchor="middle" font-size="16" font-weight="700" fill="#1E3A8A">Modelo e layout</text>
+    <text x="257" y="368" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1D4ED8">[Componente: TypeScript]</text>
+    <line x1="82" y1="378" x2="432" y2="378" stroke="#93C5FD" stroke-width="1"/>
+    <text x="82" y="397" font-size="11.5" fill="#1E3A8A">• Árvore tipada do RBD (série, paralelo, k-de-n, até 100 blocos)</text>
+    <text x="82" y="415" font-size="11.5" fill="#1E3A8A">• Validação de estrutura e parâmetros em tempo real</text>
+    <text x="82" y="433" font-size="11.5" fill="#1E3A8A">• Posicionamento automático por layout recursivo</text>
+  </g>
+
+  <!-- Seta Modelo e layout -> Desenho em SVG -->
+  <line x1="257" y1="442" x2="257" y2="488" stroke="#1E293B" stroke-width="2" marker-end="url(#arrow-solid)"/>
+  <polygon points="257,494 251,482 263,482" fill="#1E293B"/>
+  <rect x="112" y="453" width="290" height="24" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="257" y="469" text-anchor="middle" font-size="11" font-weight="600" fill="#0F172A">Árvore do RBD e coordenadas calculadas</text>
+
+  <!-- Componente 3: Desenho em SVG -->
+  <g filter="url(#shadow)">
+    <rect x="65" y="494" width="385" height="106" rx="10" fill="#DBEAFE" stroke="#2563EB" stroke-width="2"/>
+    <text x="257" y="520" text-anchor="middle" font-size="16" font-weight="700" fill="#1E3A8A">Desenho em SVG</text>
+    <text x="257" y="538" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1D4ED8">[Componente: React / SVG Próprio]</text>
+    <line x1="82" y1="548" x2="432" y2="548" stroke="#93C5FD" stroke-width="1"/>
+    <text x="82" y="567" font-size="11.5" fill="#1E3A8A">• Renderização vetorial própria (blocos 120×60, espaço 40)</text>
+    <text x="82" y="585" font-size="11.5" fill="#1E3A8A">• Navegação e zoom individuais por participante</text>
+  </g>
+
+  <!-- Seta Desenho em SVG -> Exportação -->
+  <line x1="257" y1="600" x2="257" y2="644" stroke="#1E293B" stroke-width="2" marker-end="url(#arrow-solid)"/>
+  <polygon points="257,650 251,638 263,638" fill="#1E293B"/>
+  <rect x="132" y="610" width="250" height="24" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="257" y="626" text-anchor="middle" font-size="11" font-weight="600" fill="#0F172A">Fornece o mesmo desenho SVG da tela</text>
+
+  <!-- Componente 4: Exportação em SVG e PNG -->
+  <g filter="url(#shadow)">
+    <rect x="65" y="650" width="385" height="112" rx="10" fill="#DBEAFE" stroke="#2563EB" stroke-width="2"/>
+    <text x="257" y="676" text-anchor="middle" font-size="16" font-weight="700" fill="#1E3A8A">Exportação em SVG e PNG</text>
+    <text x="257" y="694" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1D4ED8">[Componente: TypeScript no Cliente]</text>
+    <line x1="82" y1="704" x2="432" y2="704" stroke="#93C5FD" stroke-width="1"/>
+    <text x="82" y="723" font-size="11.5" fill="#1E3A8A">• Gera arquivos SVG e PNG diretamente no navegador</text>
+    <text x="82" y="741" font-size="11.5" fill="#1E3A8A">• Importa/exporta JSON versionado e função estrutural</text>
+  </g>
+
+
+  <!-- ======================================================================= -->
+  <!-- GATEWAY INTERMEDIÁRIO: NGINX -->
+  <!-- ======================================================================= -->
+  <g filter="url(#shadow)">
+    <polygon points="545,155 680,155 700,211 680,267 545,267 525,211" fill="#E0E7FF" stroke="#4F46E5" stroke-width="2.5"/>
+    <text x="612" y="192" text-anchor="middle" font-size="16.5" font-weight="700" fill="#312E81">Nginx</text>
+    <text x="612" y="210" text-anchor="middle" font-size="11" font-weight="600" fill="#4338CA">[Contêiner: Proxy]</text>
+    <line x1="550" y1="218" x2="675" y2="218" stroke="#A5B4FC" stroke-width="1"/>
+    <text x="612" y="236" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1E1B4B">HTTPS e proxy</text>
+    <text x="612" y="252" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1E1B4B">de WebSocket</text>
+  </g>
+
+  <!-- Seta Interação <-> Nginx -->
+  <line x1="458" y1="211" x2="518" y2="211" stroke="#1E293B" stroke-width="2.5" marker-start="url(#arrow-solid-start)" marker-end="url(#arrow-solid)"/>
+  <polygon points="450,211 462,205 462,217" fill="#1E293B"/>
+  <polygon points="525,211 513,205 513,217" fill="#1E293B"/>
+  <rect x="454" y="160" width="68" height="36" rx="4" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1"/>
+  <text x="488" y="175" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0F172A">HTTPS e</text>
+  <text x="488" y="189" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0F172A">WebSocket</text>
+
+
+  <!-- ======================================================================= -->
+  <!-- CONTÊINER DIREITO: PROCESSO FASTAPI (UM WORKER) - DECISÃO CENTRAL -->
+  <!-- ======================================================================= -->
+  <rect x="755" y="100" width="850" height="525" rx="14" fill="#F0FDF4" stroke="#16A34A" stroke-width="3" stroke-dasharray="8 5"/>
+  <rect x="775" y="86" width="465" height="28" rx="6" fill="#15803D"/>
+  <text x="1007" y="105" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="0.6">★ DECISÃO CENTRAL: PROCESSO FASTAPI (UM WORKER DO UVICORN)</text>
+  <text x="1180" y="132" text-anchor="middle" font-size="12" font-weight="600" fill="#14532D">[Contêiner Backend na VPS · Python · FastAPI · WebSocket Assíncrono · Validação Pydantic]</text>
+
+  <!-- Seta Nginx <-> Limites de uso -->
+  <line x1="708" y1="211" x2="778" y2="211" stroke="#15803D" stroke-width="2.5" marker-start="url(#arrow-green-start)" marker-end="url(#arrow-green)"/>
+  <polygon points="700,211 712,205 712,217" fill="#15803D"/>
+  <polygon points="785,211 773,205 773,217" fill="#15803D"/>
+  <rect x="706" y="160" width="72" height="36" rx="4" fill="#FFFFFF" stroke="#86EFAC" stroke-width="1"/>
+  <text x="742" y="175" text-anchor="middle" font-size="10.5" font-weight="700" fill="#14532D">HTTP e</text>
+  <text x="742" y="189" text-anchor="middle" font-size="10.5" font-weight="700" fill="#14532D">WebSocket</text>
+
+  <!-- Componente FastAPI 1: Limites de uso -->
+  <g filter="url(#shadow)">
+    <rect x="785" y="152" width="215" height="125" rx="10" fill="#DBEAFE" stroke="#2563EB" stroke-width="2"/>
+    <text x="892" y="178" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1E3A8A">Limites de uso</text>
+    <text x="892" y="195" text-anchor="middle" font-size="11" font-weight="600" fill="#1D4ED8">[Componente: Python]</text>
+    <line x1="800" y1="205" x2="985" y2="205" stroke="#93C5FD" stroke-width="1"/>
+    <text x="802" y="223" font-size="11.5" fill="#1E3A8A">• Controle por IP e por sessão</text>
+    <text x="802" y="241" font-size="11.5" fill="#1E3A8A">• Bloqueio após 5 senhas erradas</text>
+    <text x="802" y="259" font-size="11.5" fill="#1E3A8A">• Comandos/s e cálculo (mín. 1 s)</text>
+  </g>
+
+  <!-- Seta Limites de uso -> Sessões em memória -->
+  <line x1="1000" y1="211" x2="1053" y2="211" stroke="#15803D" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+  <polygon points="1060,211 1048,205 1048,217" fill="#15803D"/>
+  <text x="1028" y="198" text-anchor="middle" font-size="10.5" font-weight="700" fill="#14532D">Autoriza</text>
+
+  <!-- Componente FastAPI 2 (DESTAQUE CENTRAL): Sessões em memória -->
+  <g filter="url(#shadow-central)">
+    <rect x="1060" y="148" width="255" height="150" rx="12" fill="#DCFCE7" stroke="#16A34A" stroke-width="3.5"/>
+    <rect x="1082" y="136" width="210" height="22" rx="5" fill="#15803D"/>
+    <text x="1187" y="151" text-anchor="middle" font-size="10.5" font-weight="700" fill="#FFFFFF">★ AUTORIDADE EM MEMÓRIA</text>
+
+    <text x="1187" y="178" text-anchor="middle" font-size="16" font-weight="700" fill="#14532D">Sessões em memória</text>
+    <text x="1187" y="195" text-anchor="middle" font-size="11" font-weight="600" fill="#166534">[Componente: Estado Quente Python]</text>
+    <line x1="1076" y1="205" x2="1299" y2="205" stroke="#86EFAC" stroke-width="1.2"/>
+    <text x="1078" y="224" font-size="11.5" font-weight="600" fill="#14532D">• Diagrama ativo e versão atual</text>
+    <text x="1078" y="242" font-size="11.5" font-weight="600" fill="#14532D">• Participantes (até 5 por sessão)</text>
+    <text x="1078" y="260" font-size="11.5" font-weight="600" fill="#14532D">• Valida, aplica e difunde comandos</text>
+    <text x="1078" y="278" font-size="11" fill="#166534">• Propagação local em até 500 ms</text>
+  </g>
+
+  <!-- Seta Sessões em memória -> Travas de campo -->
+  <line x1="1315" y1="205" x2="1363" y2="205" stroke="#1E293B" stroke-width="2" marker-end="url(#arrow-solid)"/>
+  <polygon points="1370,205 1358,199 1358,211" fill="#1E293B"/>
+  <text x="1340" y="194" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0F172A">Travas</text>
+
+  <!-- Componente FastAPI 3: Travas de campo -->
+  <g filter="url(#shadow)">
+    <rect x="1370" y="150" width="215" height="125" rx="10" fill="#DBEAFE" stroke="#2563EB" stroke-width="2"/>
+    <text x="1477" y="176" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1E3A8A">Travas de campo</text>
+    <text x="1477" y="193" text-anchor="middle" font-size="11" font-weight="600" fill="#1D4ED8">[Componente: Python]</text>
+    <line x1="1385" y1="203" x2="1570" y2="203" stroke="#93C5FD" stroke-width="1"/>
+    <text x="1385" y="222" font-size="11.5" fill="#1E3A8A">• Bloqueio exclusivo por campo</text>
+    <text x="1385" y="240" font-size="11.5" fill="#1E3A8A">• Renovação por batimento</text>
+    <text x="1385" y="258" font-size="11.5" fill="#1E3A8A">• Expiração de arrendamento (30 s)</text>
+  </g>
+
+  <!-- Componente FastAPI 4: Cálculo de confiabilidade -->
+  <g filter="url(#shadow)">
+    <rect x="1370" y="330" width="215" height="145" rx="10" fill="#DBEAFE" stroke="#2563EB" stroke-width="2"/>
+    <text x="1477" y="356" text-anchor="middle" font-size="15" font-weight="700" fill="#1E3A8A">Cálculo de confiabilidade</text>
+    <text x="1477" y="373" text-anchor="middle" font-size="11" font-weight="600" fill="#1D4ED8">[Componente: Motor Analítico Python]</text>
+    <line x1="1385" y1="383" x2="1570" y2="383" stroke="#93C5FD" stroke-width="1"/>
+    <text x="1385" y="401" font-size="11.5" fill="#1E3A8A">• Disponibilidade A e curva R(t)</text>
+    <text x="1385" y="419" font-size="11.5" fill="#1E3A8A">• MTTF, MTBF, falhas e downtime/ano</text>
+    <text x="1385" y="437" font-size="11.5" fill="#1E3A8A">• Equações simbólicas em LaTeX</text>
+    <text x="1385" y="455" font-size="11.5" fill="#1E3A8A">• Análise de sensibilidade (MTTF/MTTR)</text>
+  </g>
+
+  <!-- Seta Sessões em memória -> Cálculo de confiabilidade -->
+  <path d="M 1315,270 L 1342,270 L 1342,395 L 1363,395" fill="none" stroke="#1E293B" stroke-width="2" marker-end="url(#arrow-solid)"/>
+  <polygon points="1370,395 1358,389 1358,401" fill="#1E293B"/>
+  <rect x="1250" y="308" width="90" height="22" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="1295" y="323" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0F172A">Aciona cálculo</text>
+
+  <!-- Componente FastAPI 5: Repositório de sessões -->
+  <g filter="url(#shadow)">
+    <rect x="810" y="455" width="265" height="135" rx="10" fill="#DBEAFE" stroke="#2563EB" stroke-width="2"/>
+    <text x="942" y="481" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1E3A8A">Repositório de sessões</text>
+    <text x="942" y="498" text-anchor="middle" font-size="11" font-weight="600" fill="#1D4ED8">[Componente: Interface / SQLAlchemy]</text>
+    <line x1="825" y1="508" x2="1060" y2="508" stroke="#93C5FD" stroke-width="1"/>
+    <text x="827" y="527" font-size="11.5" fill="#1E3A8A">• Isola o estado em memória do banco</text>
+    <text x="827" y="545" font-size="11.5" fill="#1E3A8A">• Carrega sessão no primeiro acesso</text>
+    <text x="827" y="563" font-size="11.5" fill="#1E3A8A">• Grava alterações em lote (1 a 2 s)</text>
+    <text x="827" y="581" font-size="11.5" fill="#1E3A8A">• Rotina de expiração (90 dias sem uso)</text>
+  </g>
+
+  <!-- Seta Sessões em memória -> Repositório de sessões -->
+  <path d="M 1125,298 L 1125,385 L 942,385 L 942,448" fill="none" stroke="#1E293B" stroke-width="2" marker-end="url(#arrow-solid)"/>
+  <polygon points="942,455 936,443 948,443" fill="#1E293B"/>
+  <rect x="845" y="373" width="215" height="24" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="952" y="389" text-anchor="middle" font-size="11" font-weight="600" fill="#0F172A">Carrega sessão e agenda gravação</text>
+
+  <!-- Componente FastAPI 6: Métricas por hora -->
+  <g filter="url(#shadow)">
+    <rect x="1115" y="455" width="235" height="135" rx="10" fill="#DBEAFE" stroke="#2563EB" stroke-width="2"/>
+    <text x="1232" y="481" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1E3A8A">Métricas por hora</text>
+    <text x="1232" y="498" text-anchor="middle" font-size="11" font-weight="600" fill="#1D4ED8">[Componente: Contadores Python]</text>
+    <line x1="1130" y1="508" x2="1335" y2="508" stroke="#93C5FD" stroke-width="1"/>
+    <text x="1132" y="527" font-size="11.5" fill="#1E3A8A">• Contadores anônimos em memória</text>
+    <text x="1132" y="545" font-size="11.5" fill="#1E3A8A">• Eventos: sessões, cálculos, tempos</text>
+    <text x="1132" y="563" font-size="11.5" fill="#1E3A8A">• Consolida resumo por hora</text>
+    <text x="1132" y="581" font-size="11.5" fill="#1E3A8A">• Conformidade com a LGPD</text>
+  </g>
+
+  <!-- Seta Sessões em memória -> Métricas por hora -->
+  <path d="M 1215,298 L 1215,448" fill="none" stroke="#1E293B" stroke-width="2" marker-end="url(#arrow-solid)"/>
+  <polygon points="1215,455 1209,443 1221,443" fill="#1E293B"/>
+  <rect x="1130" y="408" width="175" height="24" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="1217" y="424" text-anchor="middle" font-size="11" font-weight="600" fill="#0F172A">Incrementa contadores</text>
+
+
+  <!-- ======================================================================= -->
+  <!-- BANCO DE DADOS: SQLITE (MODO WAL) -->
+  <!-- ======================================================================= -->
+  <g filter="url(#shadow)">
+    <path d="M 885,688 L 885,768 A 215,18 0 0,0 1315,768 L 1315,688 Z" fill="#FEF3C7" stroke="#D97706" stroke-width="2.5"/>
+    <ellipse cx="1100" cy="688" rx="215" ry="18" fill="#FDE68A" stroke="#D97706" stroke-width="2.5"/>
+    <text x="1100" y="724" text-anchor="middle" font-size="16" font-weight="700" fill="#78350F">SQLite (modo WAL)</text>
+    <text x="1100" y="743" text-anchor="middle" font-size="11.5" font-weight="600" fill="#92400E">[Contêiner de Banco de Dados · SQLAlchemy · Alembic]</text>
+    <text x="1100" y="762" text-anchor="middle" font-size="11.5" fill="#78350F">Tabela de sessões (diagrama JSON, versão, hashes) e resumo de métricas por hora</text>
+  </g>
+
+  <!-- Seta Repositório de sessões -> SQLite (modo WAL) -->
+  <path d="M 942,590 L 942,642 L 1020,642 L 1020,666" fill="none" stroke="#475569" stroke-width="2.2" stroke-dasharray="6 4" marker-end="url(#arrow-dashed)"/>
+  <polygon points="1020,672 1014,660 1026,660" fill="#475569"/>
+  <rect x="780" y="630" width="225" height="24" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="892" y="646" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">Lê e grava sessões em lote (1–2 s)</text>
+
+  <!-- Seta Métricas por hora -> SQLite (modo WAL) -->
+  <path d="M 1232,590 L 1232,642 L 1180,642 L 1180,666" fill="none" stroke="#475569" stroke-width="2.2" stroke-dasharray="6 4" marker-end="url(#arrow-dashed)"/>
+  <polygon points="1180,672 1174,660 1186,660" fill="#475569"/>
+  <rect x="1195" y="630" width="195" height="24" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+  <text x="1292" y="646" text-anchor="middle" font-size="11" font-weight="700" fill="#334155">Grava resumo por hora</text>
+
+
+  <!-- ======================================================================= -->
+  <!-- LEGENDA -->
+  <!-- ======================================================================= -->
+  <rect x="35" y="805" width="1570" height="215" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="60" y="833" font-size="15" font-weight="700" fill="#0F172A">LEGENDA — SIGNIFICADO FIXO DAS FORMAS, CORES E LIGAÇÕES (NÍVEL 2: COMPONENTES)</text>
+  <line x1="60" y1="843" x2="1580" y2="843" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <!-- Coluna 1 -->
+  <rect x="60" y="860" width="42" height="28" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="3"/>
+  <text x="115" y="873" font-size="12" font-weight="700" fill="#14532D">Decisão Central: Sessões em Memória</text>
+  <text x="115" y="889" font-size="11" fill="#475569">Estado ativo no processo único (autoridade e versão)</text>
+
+  <rect x="60" y="910" width="42" height="28" rx="6" fill="#F0FDF4" stroke="#16A34A" stroke-width="2.5" stroke-dasharray="5 3"/>
+  <text x="115" y="923" font-size="12" font-weight="700" fill="#14532D">Fronteira do Processo FastAPI (um worker)</text>
+  <text x="115" y="939" font-size="11" fill="#475569">Único worker do uvicorn mantendo todos os editores no mesmo processo</text>
+
+  <!-- Coluna 2 -->
+  <rect x="520" y="860" width="42" height="28" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="2"/>
+  <text x="575" y="873" font-size="12" font-weight="700" fill="#1E3A8A">Componente de Aplicação (Cliente ou Servidor)</text>
+  <text x="575" y="889" font-size="11" fill="#475569">Módulos em TypeScript (Navegador) e em Python (FastAPI)</text>
+
+  <rect x="520" y="910" width="42" height="28" rx="6" fill="#F8FAFC" stroke="#2563EB" stroke-width="2" stroke-dasharray="5 3"/>
+  <text x="575" y="923" font-size="12" font-weight="700" fill="#1E3A8A">Fronteira do Contêiner Navegador</text>
+  <text x="575" y="939" font-size="11" fill="#475569">Executa na máquina de cada participante (React e TypeScript)</text>
+
+  <!-- Coluna 3 -->
+  <polygon points="995,860 1027,860 1035,874 1027,888 995,888 987,874" fill="#E0E7FF" stroke="#4F46E5" stroke-width="2"/>
+  <text x="1050" y="873" font-size="12" font-weight="700" fill="#312E81">Contêiner Proxy Reverso (Nginx)</text>
+  <text x="1050" y="889" font-size="11" fill="#475569">Terminação HTTPS e repasse de conexões WebSocket</text>
+
+  <path d="M 990,916 L 990,936 A 21,5 0 0,0 1032,936 L 1032,916 Z" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+  <ellipse cx="1011" cy="916" rx="21" ry="5" fill="#FDE68A" stroke="#D97706" stroke-width="2"/>
+  <text x="1050" y="923" font-size="12" font-weight="700" fill="#78350F">Banco de Dados SQLite (modo WAL)</text>
+  <text x="1050" y="939" font-size="11" fill="#475569">Persistência de sessões (JSON) e resumo de métricas/h</text>
+
+  <!-- Coluna 4 -->
+  <line x1="1335" y1="874" x2="1372" y2="874" stroke="#1E293B" stroke-width="2.5"/>
+  <polygon points="1378,874 1368,869 1368,879" fill="#1E293B"/>
+  <text x="1390" y="878" font-size="11.5" font-weight="700" fill="#0F172A">Chamada Síncrona / Tempo Real</text>
+
+  <line x1="1335" y1="924" x2="1372" y2="924" stroke="#475569" stroke-width="2.2" stroke-dasharray="5 3"/>
+  <polygon points="1378,924 1368,919 1368,929" fill="#475569"/>
+  <text x="1390" y="928" font-size="11.5" font-weight="700" fill="#334155">Gravação em Lote / Assíncrona</text>
+
+  <text x="60" y="995" font-size="12" fill="#475569"><tspan font-weight="700" fill="#0F172A">Isolamento arquitetural (ADR-001 e ADR-007):</tspan> Participantes, travas de campo e conexões ficam só em memória. O Repositório de sessões e o módulo Métricas por hora gravam no SQLite (modo WAL).</text>
+</svg>

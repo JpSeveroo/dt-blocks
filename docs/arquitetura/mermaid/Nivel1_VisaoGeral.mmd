@@ -1,0 +1,53 @@
+graph LR
+  linkStyle default fill:#ffffff
+
+  subgraph diagram ["Nível 1 - Visão Geral da Arquitetura e Implantação (DT-Blocks 2.0)"]
+    style diagram fill:#ffffff,stroke:#ffffff
+
+    subgraph 36 ["Máquina do Participante"]
+      style 36 fill:#ffffff,stroke:#64748B,color:#1E293B,stroke-dasharray: 5 5
+
+      1["<div style='font-weight: bold'>Participantes</div><div style='font-size: 75%'>[Editores e Leitores]</div>"]
+      style 1 fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A
+      37["<div style='font-weight: bold'>Navegador</div><div style='font-size: 75%'>[React · TypeScript]</div>"]
+      style 37 fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A
+      1-->37
+    end
+
+    subgraph 38 ["VPS (Linux)"]
+      style 38 fill:#ffffff,stroke:#64748B,color:#1E293B,stroke-dasharray: 5 5
+
+      39["<div style='font-weight: bold'>Serviço SSH</div><div style='font-size: 75%'>[OpenSSH]</div>"]
+      style 39 fill:#F8FAFC,stroke:#64748B,color:#334155
+      subgraph 41 ["Docker Compose"]
+        style 41 fill:#ffffff,stroke:#64748B,color:#1E293B,stroke-dasharray: 5 5
+
+        42["<div style='font-weight: bold'>Nginx</div><div style='font-size: 75%'>[Proxy Reverso]</div>"]
+        style 42 fill:#E0E7FF,stroke:#4F46E5,color:#312E81
+        44["<div style='font-weight: bold'>Processo FastAPI</div><div style='font-size: 75%'>[Python · FastAPI · Uvicorn · Pydantic]</div><div style='font-size: 75%; margin-top:4px'>1 worker · Sessões em memória</div>"]
+        style 44 fill:#DCFCE7,stroke:#16A34A,color:#14532D,stroke-width:3px
+        46[("<div style='font-weight: bold'>SQLite (modo WAL)</div><div style='font-size: 75%'>[Banco Embarcado · Arquivo em Volume]</div>")]
+        style 46 fill:#FEF3C7,stroke:#D97706,color:#78350F
+      end
+
+    end
+
+    subgraph 48 ["Fora da VPS"]
+      style 48 fill:#ffffff,stroke:#64748B,color:#1E293B,stroke-dasharray: 5 5
+
+      49["<div style='font-weight: bold'>Monitor externo</div><div style='font-size: 75%'>[Monitoramento Externo]</div>"]
+      style 49 fill:#F1F5F9,stroke:#475569,color:#1E293B,stroke-dasharray: 5 5
+      50["<div style='font-weight: bold'>Coletor externo</div><div style='font-size: 75%'>[Python / UNAME Tool]</div>"]
+      style 50 fill:#F1F5F9,stroke:#475569,color:#1E293B,stroke-dasharray: 5 5
+      51["<div style='font-weight: bold'>Backup diário</div><div style='font-size: 75%'>[Armazenamento Externo]</div>"]
+      style 51 fill:#F1F5F9,stroke:#475569,color:#1E293B,stroke-dasharray: 5 5
+    end
+
+    37-->|"HTTPS / WebSocket"|42
+    42-->|"HTTP / WS"|44
+    44-->|"Escrita em lote"|46
+    49-. "HTTPS (disponibilidade)" .->42
+    50-. "SSH (CSV / JSON)" .->39
+    46-. "Cópia criptografada" .->51
+
+  end

@@ -1,0 +1,44 @@
+@startuml
+title <size:24>Nível 2A - Detalhe do Processo FastAPI (um worker)</size>
+
+set separator none
+left to right direction
+
+<style>
+  root {
+    BackgroundColor: #ffffff
+    FontColor: #444444
+  }
+</style>
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+!include <C4/C4_Component>
+
+System_Boundary("DTBlocks20_boundary", "DT-Blocks 2.0", $tags="") {
+  Container_Boundary("DTBlocks20.ProcessoFastAPIumworker_boundary", "Processo FastAPI (um worker)", $tags="") {
+    Component(DTBlocks20.ProcessoFastAPIumworker.Limitesdeuso, "Limites de uso", $techn="Python", $descr="Limites por IP e por sessão (criação de sessões, tentativas de senha, comandos/s e cálculo a cada 1 s).", $tags="", $link="")
+    Component(DTBlocks20.ProcessoFastAPIumworker.Sessõesemmemória, "Sessões em memória", $techn="Python (Memória)", $descr="Estado das sessões em memória (diagrama versionado e participantes), garantindo propagação em 500 ms.", $tags="", $link="")
+    Component(DTBlocks20.ProcessoFastAPIumworker.Travasdecampo, "Travas de campo", $techn="Python", $descr="Bloqueio por campo com batimento e arrendamento (liberação em até 30 s na desconexão).", $tags="", $link="")
+    Component(DTBlocks20.ProcessoFastAPIumworker.Cálculodeconfiabilidade, "Cálculo de confiabilidade", $techn="Python", $descr="Disponibilidade, curva R(t), MTTF, MTBF, falhas por ano, indisponibilidade anual, equações LaTeX e sensibilidade.", $tags="", $link="")
+    Component(DTBlocks20.ProcessoFastAPIumworker.Repositóriodesessões, "Repositório de sessões", $techn="Python / SQLAlchemy", $descr="Interface de repositório que carrega sessões do banco e grava alterações em lote (1 a 2 s).", $tags="", $link="")
+    Component(DTBlocks20.ProcessoFastAPIumworker.Métricasporhora, "Métricas por hora", $techn="Python", $descr="Contadores anônimos na aplicação e resumo por hora.", $tags="", $link="")
+  }
+
+  ContainerDb(DTBlocks20.SQLitemodoWAL, "SQLite (modo WAL)", $techn="SQLite (modo WAL)", $descr="Sessões e métricas por hora.", $tags="", $link="")
+  Container(DTBlocks20.Nginx, "Nginx", $techn="Nginx", $descr="HTTPS e proxy de WebSocket.", $tags="", $link="")
+}
+
+Rel(DTBlocks20.Nginx, DTBlocks20.ProcessoFastAPIumworker.Limitesdeuso, "Entrega requisições e mensagens WebSocket", $techn="HTTP / WebSocket", $tags="", $link="")
+Rel(DTBlocks20.ProcessoFastAPIumworker.Limitesdeuso, DTBlocks20.ProcessoFastAPIumworker.Sessõesemmemória, "Comandos e acessos validados pelos limites de uso", $techn="Memória (Python)", $tags="", $link="")
+Rel(DTBlocks20.ProcessoFastAPIumworker.Sessõesemmemória, DTBlocks20.ProcessoFastAPIumworker.Travasdecampo, "Concede, renova por batimento e expira travas de campo", $techn="Memória (Python)", $tags="", $link="")
+Rel(DTBlocks20.ProcessoFastAPIumworker.Sessõesemmemória, DTBlocks20.ProcessoFastAPIumworker.Cálculodeconfiabilidade, "Solicita cálculo de confiabilidade e disponibilidade", $techn="Memória (Python)", $tags="", $link="")
+Rel(DTBlocks20.ProcessoFastAPIumworker.Sessõesemmemória, DTBlocks20.ProcessoFastAPIumworker.Repositóriodesessões, "Carrega sessão e agenda gravação no banco", $techn="Interface de repositório", $tags="", $link="")
+Rel(DTBlocks20.ProcessoFastAPIumworker.Sessõesemmemória, DTBlocks20.ProcessoFastAPIumworker.Métricasporhora, "Atualiza contadores anônimos de uso e desempenho", $techn="Memória (Python)", $tags="", $link="")
+Rel(DTBlocks20.ProcessoFastAPIumworker.Repositóriodesessões, DTBlocks20.SQLitemodoWAL, "Lê e grava sessões em lote (1–2 s após alteração)", $techn="SQLite (WAL)", $tags="", $link="")
+Rel(DTBlocks20.ProcessoFastAPIumworker.Métricasporhora, DTBlocks20.SQLitemodoWAL, "Grava resumo de métricas por hora", $techn="SQLite (WAL)", $tags="", $link="")
+
+SHOW_LEGEND(true)
+hide stereotypes
+@enduml

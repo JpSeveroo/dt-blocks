@@ -1,0 +1,41 @@
+@startuml
+title <size:24>Nível 2B - Detalhe do Navegador (React e TypeScript)</size>
+
+set separator none
+left to right direction
+
+<style>
+  root {
+    BackgroundColor: #ffffff
+    FontColor: #444444
+  }
+</style>
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+!include <C4/C4_Component>
+
+Person(ParticipanteEditorouLeitor, "Participante (Editor ou Leitor)", $descr="Acessa a sessão por link (edição ou leitura), sem conta de usuário (até 5 simultâneos por sessão).", $tags="", $link="")
+
+System_Boundary("DTBlocks20_boundary", "DT-Blocks 2.0", $tags="") {
+  Container_Boundary("DTBlocks20.Navegador_boundary", "Navegador", $tags="") {
+    Component(DTBlocks20.Navegador.Modeloelayout, "Modelo e layout", $techn="TypeScript", $descr="Árvore tipada do diagrama (série, paralelo, k-de-n) e posicionamento automático por layout recursivo.", $tags="", $link="")
+    Component(DTBlocks20.Navegador.DesenhoemSVG, "Desenho em SVG", $techn="React / SVG", $descr="Desenho vetorial próprio do diagrama RBD na tela.", $tags="", $link="")
+    Component(DTBlocks20.Navegador.Interação, "Interação", $techn="TypeScript / WebSocket", $descr="Edição de blocos, travas de campo, desfazer individual (até 100 ações) e mensagens WebSocket.", $tags="", $link="")
+    Component(DTBlocks20.Navegador.ExportaçãoemSVGePNG, "Exportação em SVG e PNG", $techn="TypeScript", $descr="Exportação em SVG e PNG feita no navegador (além de JSON e função estrutural).", $tags="", $link="")
+  }
+
+  Container(DTBlocks20.Nginx, "Nginx", $techn="Nginx", $descr="HTTPS e proxy de WebSocket.", $tags="", $link="")
+}
+
+Rel(ParticipanteEditorouLeitor, DTBlocks20.Navegador.Interação, "Manipula blocos, parâmetros, cálculo e desfazer", $techn="Interface Web", $tags="", $link="")
+Rel(ParticipanteEditorouLeitor, DTBlocks20.Navegador.ExportaçãoemSVGePNG, "Exporta diagrama (SVG, PNG, JSON, função estrutural)", $techn="Interface Web", $tags="", $link="")
+Rel(DTBlocks20.Navegador.Interação, DTBlocks20.Nginx, "HTTPS e WebSocket (comandos, travas, cálculo, snapshots e difusões)", $techn="HTTPS / WebSocket", $tags="", $link="")
+Rel(DTBlocks20.Navegador.Interação, DTBlocks20.Navegador.Modeloelayout, "Atualiza o modelo após confirmação ('aplicado') do servidor", $techn="TypeScript", $tags="", $link="")
+Rel(DTBlocks20.Navegador.Modeloelayout, DTBlocks20.Navegador.DesenhoemSVG, "Árvore do RBD e coordenadas do layout recursivo", $techn="TypeScript", $tags="", $link="")
+Rel(DTBlocks20.Navegador.DesenhoemSVG, DTBlocks20.Navegador.ExportaçãoemSVGePNG, "SVG da tela para exportação em SVG e PNG", $techn="DOM / SVG", $tags="", $link="")
+
+SHOW_LEGEND(true)
+hide stereotypes
+@enduml

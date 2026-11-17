@@ -1,0 +1,248 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1640 1050" width="1640" height="1050" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow-solid" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#1E293B"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#15803D"/>
+    </marker>
+    <marker id="arrow-dashed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 1.5 L 9 5 L 0 8.5 z" fill="#475569"/>
+    </marker>
+    <filter id="shadow" x="-4%" y="-4%" width="108%" height="110%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+    <filter id="shadow-central" x="-6%" y="-6%" width="112%" height="114%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#16A34A" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <!-- Fundo Geral -->
+  <rect x="0" y="0" width="1640" height="1050" fill="#FFFFFF"/>
+  <rect x="12" y="12" width="1616" height="1026" rx="14" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2"/>
+
+  <!-- Cabeçalho -->
+  <text x="820" y="48" text-anchor="middle" font-size="24" font-weight="700" fill="#0F172A">DT-Blocks 2.0 — Nível 3: Fluxo de uma Edição Colaborativa em Tempo Real</text>
+  <text x="820" y="74" text-anchor="middle" font-size="14" fill="#475569">Servidor como autoridade, comandos versionados, bloqueio de campo e confirmação antes de atualizar a tela (meta: 500 ms ida e volta)</text>
+
+  <!-- ======================================================================= -->
+  <!-- ZONA ESQUERDA: NAVEGADORES DOS PARTICIPANTES -->
+  <!-- ======================================================================= -->
+  <rect x="35" y="105" width="350" height="670" rx="14" fill="#F8FAFC" stroke="#64748B" stroke-width="2" stroke-dasharray="8 5"/>
+  <rect x="55" y="93" width="250" height="26" rx="6" fill="#334155"/>
+  <text x="180" y="111" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="0.6">MÁQUINA DE CADA PESSOA</text>
+
+  <!-- Editor A -->
+  <g filter="url(#shadow)">
+    <rect x="65" y="150" width="290" height="215" rx="10" fill="#DBEAFE" stroke="#2563EB" stroke-width="2.5"/>
+    <text x="210" y="180" text-anchor="middle" font-size="16.5" font-weight="700" fill="#1E3A8A">Editor A — Navegador</text>
+    <text x="210" y="198" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1D4ED8">[React e TypeScript · Autor da Edição]</text>
+    <line x1="82" y1="210" x2="338" y2="210" stroke="#93C5FD" stroke-width="1"/>
+    <text x="82" y="232" font-size="12" fill="#1E3A8A">• Pede trava do campo antes de alterar</text>
+    <text x="82" y="252" font-size="12" fill="#1E3A8A">• Envia comando + versão base atual</text>
+    <text x="82" y="272" font-size="12" font-weight="700" fill="#1E3A8A">• Aguarda 'aplicado' para exibir mudança</text>
+    <rect x="82" y="290" width="256" height="56" rx="6" fill="#EFF6FF" stroke="#60A5FA" stroke-width="1"/>
+    <text x="210" y="311" text-anchor="middle" font-size="11" font-weight="600" fill="#1E3A8A">Se versão divergir ou trava não for de A:</text>
+    <text x="210" y="329" text-anchor="middle" font-size="11" fill="#334155">Recebe 'recusado' + snapshot completo</text>
+  </g>
+
+  <!-- Editor B -->
+  <g filter="url(#shadow)">
+    <rect x="65" y="495" width="290" height="190" rx="10" fill="#DBEAFE" stroke="#2563EB" stroke-width="2.5"/>
+    <text x="210" y="525" text-anchor="middle" font-size="16.5" font-weight="700" fill="#1E3A8A">Editor B — Navegador</text>
+    <text x="210" y="543" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1D4ED8">[React e TypeScript · Demais Participantes]</text>
+    <line x1="82" y1="555" x2="338" y2="555" stroke="#93C5FD" stroke-width="1"/>
+    <text x="82" y="578" font-size="12" fill="#1E3A8A">• Vê aviso de campo travado pelo Editor A</text>
+    <text x="82" y="598" font-size="12" fill="#1E3A8A">  (exibe apelido de animal e cor de A)</text>
+    <text x="82" y="622" font-size="12" font-weight="700" fill="#1E3A8A">• Recebe a mesma mensagem 'aplicado'</text>
+    <text x="82" y="642" font-size="12" fill="#1E3A8A">  com a nova versão em até 500 ms</text>
+  </g>
+
+
+  <!-- ======================================================================= -->
+  <!-- ZONA DIREITA: VPS (DOCKER COMPOSE) -->
+  <!-- ======================================================================= -->
+  <rect x="520" y="105" width="1085" height="670" rx="14" fill="#F8FAFC" stroke="#64748B" stroke-width="2" stroke-dasharray="8 5"/>
+  <rect x="540" y="93" width="290" height="26" rx="6" fill="#334155"/>
+  <text x="685" y="111" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="0.6">VPS · DOCKER COMPOSE</text>
+
+  <!-- Nginx -->
+  <g filter="url(#shadow)">
+    <polygon points="580,165 715,165 735,310 715,455 580,455 560,310" fill="#E0E7FF" stroke="#4F46E5" stroke-width="2.5"/>
+    <text x="647" y="285" text-anchor="middle" font-size="17" font-weight="700" fill="#312E81">Nginx</text>
+    <text x="647" y="305" text-anchor="middle" font-size="11.5" font-weight="600" fill="#4338CA">[Proxy Reverso]</text>
+    <line x1="585" y1="318" x2="710" y2="318" stroke="#A5B4FC" stroke-width="1"/>
+    <text x="647" y="340" text-anchor="middle" font-size="12" fill="#1E1B4B">Mantém túneis</text>
+    <text x="647" y="358" text-anchor="middle" font-size="12" fill="#1E1B4B">HTTPS / WebSocket</text>
+  </g>
+
+  <!-- Fronteira Processo FastAPI -->
+  <rect x="830" y="135" width="750" height="445" rx="12" fill="#F0FDF4" stroke="#16A34A" stroke-width="3" stroke-dasharray="6 4"/>
+  <rect x="850" y="122" width="430" height="25" rx="5" fill="#15803D"/>
+  <text x="1065" y="139" text-anchor="middle" font-size="11.5" font-weight="700" fill="#FFFFFF">★ PROCESSO FASTAPI (UM WORKER DO UVICORN)</text>
+
+  <!-- Passo 3: Validação e Limites -->
+  <g filter="url(#shadow)">
+    <rect x="855" y="175" width="240" height="125" rx="10" fill="#DBEAFE" stroke="#2563EB" stroke-width="2"/>
+    <text x="975" y="202" text-anchor="middle" font-size="15" font-weight="700" fill="#1E3A8A">Validação e Limites de uso</text>
+    <text x="975" y="220" text-anchor="middle" font-size="11" font-weight="600" fill="#1D4ED8">[Pydantic · Autorização · Limites]</text>
+    <line x1="870" y1="230" x2="1080" y2="230" stroke="#93C5FD" stroke-width="1"/>
+    <text x="872" y="249" font-size="11.5" fill="#1E3A8A">• Verifica permissão de edição</text>
+    <text x="872" y="267" font-size="11.5" fill="#1E3A8A">• Valida esquema Pydantic e limites</text>
+    <text x="872" y="285" font-size="11.5" fill="#1E3A8A">• Confere versão base e trava ativa</text>
+  </g>
+
+  <!-- Passo 4: Sessões em memória + Travas de campo -->
+  <g filter="url(#shadow-central)">
+    <rect x="1235" y="165" width="320" height="165" rx="12" fill="#DCFCE7" stroke="#16A34A" stroke-width="3.5"/>
+    <rect x="1258" y="153" width="275" height="22" rx="5" fill="#15803D"/>
+    <text x="1395" y="168" text-anchor="middle" font-size="10.5" font-weight="700" fill="#FFFFFF">★ SESSÕES EM MEMÓRIA E TRAVAS DE CAMPO</text>
+
+    <text x="1395" y="196" text-anchor="middle" font-size="16" font-weight="700" fill="#14532D">Sessões em memória</text>
+    <text x="1395" y="214" text-anchor="middle" font-size="11.5" font-weight="600" fill="#166534">[Autoridade do Estado e Versão]</text>
+    <line x1="1252" y1="224" x2="1538" y2="224" stroke="#86EFAC" stroke-width="1.2"/>
+    <text x="1254" y="244" font-size="12" font-weight="600" fill="#14532D">• Concede trava de campo a A e avisa B</text>
+    <text x="1254" y="264" font-size="12" font-weight="600" fill="#14532D">• Aplica alteração em memória</text>
+    <text x="1254" y="284" font-size="12" font-weight="600" fill="#14532D">• Incrementa a versão do diagrama</text>
+    <text x="1254" y="304" font-size="12" font-weight="600" fill="#14532D">• Registra autor da última edição do bloco</text>
+  </g>
+
+  <!-- Repositório de sessões -->
+  <g filter="url(#shadow)">
+    <rect x="1235" y="425" width="320" height="120" rx="10" fill="#DBEAFE" stroke="#2563EB" stroke-width="2"/>
+    <text x="1395" y="453" text-anchor="middle" font-size="15.5" font-weight="700" fill="#1E3A8A">Repositório de sessões</text>
+    <text x="1395" y="471" text-anchor="middle" font-size="11.5" font-weight="600" fill="#1D4ED8">[Interface de Persistência em Lote]</text>
+    <line x1="1252" y1="481" x2="1538" y2="481" stroke="#93C5FD" stroke-width="1"/>
+    <text x="1254" y="502" font-size="12" fill="#1E3A8A">• Agrupa alterações próximas da sessão</text>
+    <text x="1254" y="522" font-size="12" fill="#1E3A8A">• Grava estado mais recente 1 a 2 s depois</text>
+  </g>
+
+  <!-- SQLite (modo WAL) -->
+  <g filter="url(#shadow)">
+    <path d="M 1235,645 L 1235,725 A 160,16 0 0,0 1555,725 L 1555,645 Z" fill="#FEF3C7" stroke="#D97706" stroke-width="2.5"/>
+    <ellipse cx="1395" cy="645" rx="160" ry="16" fill="#FDE68A" stroke="#D97706" stroke-width="2.5"/>
+    <text x="1395" y="680" text-anchor="middle" font-size="15.5" font-weight="700" fill="#78350F">SQLite (modo WAL)</text>
+    <text x="1395" y="698" text-anchor="middle" font-size="11.5" font-weight="600" fill="#92400E">[Persistência em Disco]</text>
+    <text x="1395" y="716" text-anchor="middle" font-size="11.5" fill="#78350F">Coluna diagrama (JSON) e versao atualizados</text>
+  </g>
+
+
+  <!-- ======================================================================= -->
+  <!-- SETAS NUMERADAS DO FLUXO DE UMA EDIÇÃO (PASSOS 1 A 6) -->
+  <!-- ======================================================================= -->
+
+  <!-- PASSO 1: Trava de campo -->
+  <line x1="355" y1="195" x2="568" y2="195" stroke="#1E293B" stroke-width="2.2" marker-end="url(#arrow-solid)"/>
+  <polygon points="575,195 563,189 563,201" fill="#1E293B"/>
+  <rect x="372" y="144" width="175" height="44" rx="6" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+  <circle cx="390" cy="166" r="11" fill="#2563EB"/>
+  <text x="390" y="170" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">1</text>
+  <text x="472" y="162" text-anchor="middle" font-size="11" font-weight="700" fill="#0F172A">Pede trava de campo</text>
+  <text x="472" y="178" text-anchor="middle" font-size="10.5" fill="#334155">(concede a A e avisa B)</text>
+
+  <!-- PASSO 2: Envia comando com versão base -->
+  <line x1="355" y1="275" x2="558" y2="275" stroke="#1E293B" stroke-width="2.5" marker-end="url(#arrow-solid)"/>
+  <polygon points="565,275 553,269 553,281" fill="#1E293B"/>
+  <rect x="372" y="224" width="175" height="44" rx="6" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5"/>
+  <circle cx="390" cy="246" r="11" fill="#2563EB"/>
+  <text x="390" y="250" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">2</text>
+  <text x="472" y="242" text-anchor="middle" font-size="11" font-weight="700" fill="#0F172A">Envia comando</text>
+  <text x="472" y="258" text-anchor="middle" font-size="10.5" fill="#334155">+ versão em que se baseia</text>
+
+  <!-- Nginx -> Validação (Passos 1 e 2 chegam ao FastAPI) -->
+  <line x1="726" y1="238" x2="848" y2="238" stroke="#1E293B" stroke-width="2.2" marker-end="url(#arrow-solid)"/>
+  <polygon points="855,238 843,232 843,244" fill="#1E293B"/>
+
+  <!-- PASSO 3: Validação no servidor -->
+  <line x1="1095" y1="238" x2="1228" y2="238" stroke="#15803D" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+  <polygon points="1235,238 1223,232 1223,244" fill="#15803D"/>
+  <rect x="1104" y="168" width="122" height="56" rx="6" fill="#FFFFFF" stroke="#16A34A" stroke-width="1.5"/>
+  <circle cx="1122" cy="196" r="11" fill="#16A34A"/>
+  <text x="1122" y="200" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">3</text>
+  <text x="1178" y="189" text-anchor="middle" font-size="11" font-weight="700" fill="#14532D">Valida</text>
+  <text x="1178" y="204" text-anchor="middle" font-size="10.5" fill="#334155">trava, versão</text>
+  <text x="1178" y="217" text-anchor="middle" font-size="10.5" fill="#334155">e esquema</text>
+
+  <!-- PASSO 4: Aplica em memória e incrementa versão -->
+  <rect x="1255" y="340" width="280" height="44" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="2"/>
+  <circle cx="1277" cy="362" r="12" fill="#15803D"/>
+  <text x="1277" y="366" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">4</text>
+  <text x="1405" y="358" text-anchor="middle" font-size="11.5" font-weight="700" fill="#14532D">Aplica em memória e incrementa versão</text>
+  <text x="1405" y="374" text-anchor="middle" font-size="10.5" fill="#166534">(chamada local no worker único)</text>
+
+  <!-- PASSO 5: Difunde 'aplicado, nova versão' aos Editores A e B -->
+  <path d="M 1235,310 L 990,395 L 732,395" fill="none" stroke="#15803D" stroke-width="2.8" marker-end="url(#arrow-green)"/>
+  <polygon points="724,395 736,389 736,401" fill="#15803D"/>
+  <rect x="855" y="368" width="295" height="48" rx="6" fill="#FFFFFF" stroke="#16A34A" stroke-width="2"/>
+  <circle cx="877" cy="392" r="12" fill="#15803D"/>
+  <text x="877" y="396" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">5</text>
+  <text x="1012" y="388" text-anchor="middle" font-size="11.5" font-weight="700" fill="#14532D">Difunde "aplicado, nova versão"</text>
+  <text x="1012" y="404" text-anchor="middle" font-size="10.5" fill="#166534">para todos os participantes da sessão</text>
+
+  <!-- Nginx -> Editor A e Editor B (entrega do Passo 5) -->
+  <path d="M 568,385 L 445,385 L 445,335 L 362,335" fill="none" stroke="#15803D" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+  <polygon points="355,335 367,329 367,341" fill="#15803D"/>
+  <path d="M 568,405 L 445,405 L 445,565 L 362,565" fill="none" stroke="#15803D" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+  <polygon points="355,565 367,559 367,571" fill="#15803D"/>
+  <rect x="368" y="425" width="165" height="54" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+  <text x="450" y="444" text-anchor="middle" font-size="11" font-weight="700" fill="#14532D">5. Recebem "aplicado"</text>
+  <text x="450" y="460" text-anchor="middle" font-size="10.5" font-weight="600" fill="#166534">Só aqui a tela de A e B</text>
+  <text x="450" y="473" text-anchor="middle" font-size="10.5" font-weight="600" fill="#166534">mostra a mudança (≤ 500 ms)</text>
+
+  <!-- PASSO 6: Gravação em lote no SQLite -->
+  <line x1="1395" y1="384" x2="1395" y2="418" stroke="#475569" stroke-width="2.2" stroke-dasharray="6 4" marker-end="url(#arrow-dashed)"/>
+  <polygon points="1395,425 1389,413 1401,413" fill="#475569"/>
+  <line x1="1395" y1="545" x2="1395" y2="622" stroke="#475569" stroke-width="2.2" stroke-dasharray="6 4" marker-end="url(#arrow-dashed)"/>
+  <polygon points="1395,629 1389,617 1401,617" fill="#475569"/>
+  <rect x="1248" y="560" width="295" height="48" rx="6" fill="#FFFFFF" stroke="#475569" stroke-width="1.5"/>
+  <circle cx="1270" cy="584" r="12" fill="#475569"/>
+  <text x="1270" y="588" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">6</text>
+  <text x="1405" y="580" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1E293B">Grava diagrama no SQLite em lote</text>
+  <text x="1405" y="596" text-anchor="middle" font-size="10.5" fill="#475569">(1 a 2 s após a última alteração da sessão)</text>
+
+
+  <!-- ======================================================================= -->
+  <!-- LEGENDA -->
+  <!-- ======================================================================= -->
+  <rect x="35" y="805" width="1570" height="215" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="60" y="833" font-size="15" font-weight="700" fill="#0F172A">LEGENDA — SIGNIFICADO FIXO DAS FORMAS, CORES E PASSOS (NÍVEL 3: FLUXO DE UMA EDIÇÃO)</text>
+  <line x1="60" y1="843" x2="1580" y2="843" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <!-- Coluna 1 -->
+  <rect x="60" y="860" width="42" height="28" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="3"/>
+  <text x="115" y="873" font-size="12" font-weight="700" fill="#14532D">Decisão Central (Autoridade em Memória)</text>
+  <text x="115" y="889" font-size="11" fill="#475569">Valida versão, aplica mudança em memória e difunde</text>
+
+  <rect x="60" y="910" width="42" height="28" rx="6" fill="#DBEAFE" stroke="#2563EB" stroke-width="2"/>
+  <text x="115" y="923" font-size="12" font-weight="700" fill="#1E3A8A">Navegadores e Componentes de Aplicação</text>
+  <text x="115" y="939" font-size="11" fill="#475569">Editores A e B, Validação/Limites e Repositório</text>
+
+  <!-- Coluna 2 -->
+  <polygon points="525,860 557,860 565,874 557,888 525,888 517,874" fill="#E0E7FF" stroke="#4F46E5" stroke-width="2"/>
+  <text x="580" y="873" font-size="12" font-weight="700" fill="#312E81">Proxy Reverso Nginx (WebSocket)</text>
+  <text x="580" y="889" font-size="11" fill="#475569">Intermedia mensagens WebSocket de ida e volta</text>
+
+  <path d="M 520,916 L 520,936 A 21,5 0 0,0 562,936 L 562,916 Z" fill="#FEF3C7" stroke="#D97706" stroke-width="2"/>
+  <ellipse cx="541" cy="916" rx="21" ry="5" fill="#FDE68A" stroke="#D97706" stroke-width="2"/>
+  <text x="580" y="923" font-size="12" font-weight="700" fill="#78350F">Banco de Dados SQLite (modo WAL)</text>
+  <text x="580" y="939" font-size="11" fill="#475569">Recebe gravação em lote fora do caminho de 500 ms</text>
+
+  <!-- Coluna 3 -->
+  <line x1="970" y1="874" x2="1008" y2="874" stroke="#1E293B" stroke-width="2.5"/>
+  <polygon points="1015,874 1005,869 1005,879" fill="#1E293B"/>
+  <text x="1025" y="873" font-size="12" font-weight="700" fill="#0F172A">Envio de Comando / Trava (Passos 1 e 2)</text>
+  <text x="1025" y="889" font-size="11" fill="#475569">Cliente pede trava e envia comando com versão base</text>
+
+  <line x1="970" y1="924" x2="1008" y2="924" stroke="#15803D" stroke-width="2.8"/>
+  <polygon points="1015,924 1005,919 1005,929" fill="#15803D"/>
+  <text x="1025" y="923" font-size="12" font-weight="700" fill="#14532D">Confirmação e Difusão (Passos 3, 4 e 5)</text>
+  <text x="1025" y="939" font-size="11" fill="#475569">Aplicação em memória e broadcast "aplicado, nova versão"</text>
+
+  <!-- Coluna 4 -->
+  <line x1="1355" y1="874" x2="1393" y2="874" stroke="#475569" stroke-width="2.2" stroke-dasharray="5 3"/>
+  <polygon points="1400,874 1390,869 1390,879" fill="#475569"/>
+  <text x="1410" y="873" font-size="12" font-weight="700" fill="#334155">Persistência em Lote (Passo 6)</text>
+  <text x="1410" y="889" font-size="11" fill="#475569">Grava no SQLite 1–2 s depois</text>
+
+  <text x="60" y="995" font-size="12" fill="#475569"><tspan font-weight="700" fill="#0F172A">Regra de consistência (ADR-004):</tspan> Sem CRDT ou transformação operacional. A tela de A só reflete a edição quando chega o "aplicado" (Passo 5), garantindo que A e B vejam exatamente o mesmo estado versionado.</text>
+</svg>

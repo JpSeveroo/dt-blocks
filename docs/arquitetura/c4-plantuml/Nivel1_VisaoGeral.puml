@@ -1,0 +1,49 @@
+@startuml
+title <size:24>Nível 1 - Visão Geral da Arquitetura e Implantação (DT-Blocks 2.0)</size>
+
+set separator none
+left to right direction
+
+<style>
+  root {
+    BackgroundColor: #ffffff
+    FontColor: #444444
+  }
+</style>
+
+!include <C4/C4>
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+!include <C4/C4_Deployment>
+
+Deployment_Node(Produção.MáquinadoParticipante, "Máquina do Participante", $type="Ambiente Cliente", $descr="", $tags="", $link="") {
+  Person(Produção.MáquinadoParticipante.Participantes, "Participantes", $descr="Editores e Leitores", $tags="", $link="")
+  Container(Produção.MáquinadoParticipante.Navegador_1, "Navegador", $techn="React · TypeScript", $descr="", $tags="", $link="")
+}
+
+Deployment_Node(Produção.VPS, "VPS", $type="Linux", $descr="", $tags="", $link="") {
+  Deployment_Node(Produção.VPS.ServiçoSSH, "Serviço SSH", $type="OpenSSH", $descr="", $tags="", $link="")
+  Deployment_Node(Produção.VPS.DockerCompose, "Docker Compose", $type="Docker Compose", $descr="", $tags="", $link="") {
+    Container(Produção.VPS.DockerCompose.Nginx_1, "Nginx", $techn="Proxy Reverso", $descr="", $tags="", $link="")
+    Container(Produção.VPS.DockerCompose.ProcessoFastAPI_1, "Processo FastAPI", $techn="Python · FastAPI · Uvicorn · Pydantic", $descr="1 worker · Sessões em memória", $tags="", $link="")
+    ContainerDb(Produção.VPS.DockerCompose.SQLitemodoWAL_1, "SQLite (modo WAL)", $techn="Banco Embarcado · Arquivo em Volume", $descr="", $tags="", $link="")
+  }
+}
+
+Deployment_Node(Produção.ForadaVPS, "Fora da VPS", $type="Ambiente Externo", $descr="", $tags="", $link="") {
+  Deployment_Node(Produção.ForadaVPS.Coletorexterno, "Coletor externo", $type="Python / UNAME Tool", $descr="", $tags="", $link="")
+  Deployment_Node(Produção.ForadaVPS.Monitorexterno, "Monitor externo", $type="Monitoramento Externo", $descr="", $tags="", $link="")
+  Deployment_Node(Produção.ForadaVPS.Backupdiário, "Backup diário", $type="Armazenamento Externo", $descr="", $tags="", $link="")
+}
+
+Rel(Produção.MáquinadoParticipante.Participantes, Produção.MáquinadoParticipante.Navegador_1, "", $techn="", $tags="", $link="")
+Rel(Produção.MáquinadoParticipante.Navegador_1, Produção.VPS.DockerCompose.Nginx_1, "HTTPS / WebSocket", $techn="", $tags="", $link="")
+Rel(Produção.VPS.DockerCompose.Nginx_1, Produção.VPS.DockerCompose.ProcessoFastAPI_1, "HTTP / WS", $techn="", $tags="", $link="")
+Rel(Produção.VPS.DockerCompose.ProcessoFastAPI_1, Produção.VPS.DockerCompose.SQLitemodoWAL_1, "Escrita em lote", $techn="", $tags="", $link="")
+Rel(Produção.ForadaVPS.Monitorexterno, Produção.VPS.DockerCompose.Nginx_1, "HTTPS (disponibilidade)", $techn="", $tags="", $link="")
+Rel(Produção.ForadaVPS.Coletorexterno, Produção.VPS.ServiçoSSH, "SSH (CSV / JSON)", $techn="", $tags="", $link="")
+Rel(Produção.VPS.DockerCompose.SQLitemodoWAL_1, Produção.ForadaVPS.Backupdiário, "Cópia criptografada", $techn="", $tags="", $link="")
+
+SHOW_LEGEND(true)
+hide stereotypes
+@enduml

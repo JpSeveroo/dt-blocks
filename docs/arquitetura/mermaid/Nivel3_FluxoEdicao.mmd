@@ -1,0 +1,39 @@
+graph LR
+  linkStyle default fill:#ffffff
+
+  subgraph diagram ["Nível 3 - Fluxo de uma edição em tempo real (meta de 500 ms ida e volta)"]
+    style diagram fill:#ffffff,stroke:#ffffff
+
+    subgraph 2 ["DT-Blocks 2.0"]
+      style 2 fill:#ffffff,stroke:#64748B,color:#1E293B,stroke-dasharray: 5 5
+
+      subgraph 9 ["Processo FastAPI (um worker)"]
+        style 9 fill:#F0FDF4,stroke:#16A34A,color:#14532D,stroke-width:2px
+
+        10["<div style='font-weight: bold'>Limites de uso</div><div style='font-size: 70%; margin-top: 0px'>[Component: Python]</div>"]
+        style 10 fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A
+        11["<div style='font-weight: bold'>Sessões em memória</div><div style='font-size: 70%; margin-top: 0px'>[Component: Python (Memória)]</div>"]
+        style 11 fill:#DCFCE7,stroke:#16A34A,color:#14532D,stroke-width:3px
+        12["<div style='font-weight: bold'>Travas de campo</div><div style='font-size: 70%; margin-top: 0px'>[Component: Python]</div>"]
+        style 12 fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A
+        14["<div style='font-weight: bold'>Repositório de sessões</div><div style='font-size: 70%; margin-top: 0px'>[Component: Python / SQLAlchemy]</div>"]
+        style 14 fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A
+      end
+
+      16[("<div style='font-weight: bold'>SQLite (modo WAL)</div><div style='font-size: 70%; margin-top: 0px'>[Container: SQLite (modo WAL)]</div>")]
+      style 16 fill:#FEF3C7,stroke:#D97706,color:#78350F
+      3["<div style='font-weight: bold'>Navegador</div><div style='font-size: 70%; margin-top: 0px'>[Container: React e TypeScript]</div>"]
+      style 3 fill:#DBEAFE,stroke:#2563EB,color:#1E3A8A
+      8["<div style='font-weight: bold'>Nginx</div><div style='font-size: 70%; margin-top: 0px'>[Container: Nginx]</div>"]
+      style 8 fill:#E0E7FF,stroke:#4F46E5,color:#312E81
+    end
+
+    3-->|"<div>1. Editor A pede trava de<br />campo e envia comando de<br />alteração com a versão base</div><div style='font-size: 70%'>[HTTPS / WebSocket]</div>"|8
+    8-->|"<div>2. Repassa comando pelo<br />WebSocket ao processo único</div><div style='font-size: 70%'>[HTTP / WebSocket]</div>"|10
+    10-->|"<div>3. Valida limites, permissão,<br />trava, esquema e versão base</div><div style='font-size: 70%'>[Memória (Python)]</div>"|11
+    11-->|"<div>4. Confere trava de A, aplica<br />alteração em memória e<br />incrementa a versão</div><div style='font-size: 70%'>[Memória (Python)]</div>"|12
+    11-->|"<div>5. Difunde 'aplicado, nova<br />versão' aos Editores A e B<br />(tela atualiza aqui)</div><div style='font-size: 70%'>[WebSocket]</div>"|8
+    11-. "<div>6a. Agenda gravação do estado<br />mais recente da sessão</div><div style='font-size: 70%'>[Interface de repositório]</div>" .->14
+    14-. "<div>6b. Grava o diagrama no<br />SQLite em lote (1 a 2 s após<br />a última alteração)</div><div style='font-size: 70%'>[SQLite (WAL)]</div>" .->16
+
+  end
