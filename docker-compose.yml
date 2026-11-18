@@ -1,0 +1,28 @@
+services:
+  fastapi:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: dtblocks-fastapi
+    # Decisão central da arquitetura: 1 único worker mantendo o estado autoritativo em memória
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 1
+    env_file:
+      - .env.example
+    environment:
+      - SQLITE_DB_PATH=/data/dtblocks.db
+    volumes:
+      - ./data:/data
+    expose:
+      - "8000"
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: dtblocks-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./infra/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - fastapi
+    restart: unless-stopped
